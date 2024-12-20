@@ -3,7 +3,8 @@ import { LogOut } from "lucide-react";
 export function Profile() {
   return (
     <div className="grid items-center gap-3 grid-cols-profile">
-      <img src="https://github.com/sergiorbf.png"
+      <img
+        src="https://github.com/sergiorbf.png"
         className="h-10 w-10 rounded-full"
         alt="" />
       <div className="flex flex-1 flex-col truncate">
