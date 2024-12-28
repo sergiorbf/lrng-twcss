@@ -1,6 +1,11 @@
-import { Mail, UploadCloud, User } from "lucide-react";
+import { Bold, Italic, Link, List, ListOrdered, Mail } from "lucide-react";
 import { InputControl, InputPrefix, InputRoot } from "./components/Input";
 import { SettingsTabs } from "./components/SettingsTabs";
+import * as FileInput from "./components/Form/FileInput";
+import { Select } from "./components/Form/Select";
+import { SelectItem } from "./components/Form/Select/selectItem";
+import { TextArea } from "./components/Form/textArea";
+
 
 export default function Home() {
   return (
@@ -61,23 +66,13 @@ export default function Home() {
                 This will be displayed on your profile.
               </span>
             </label>
-            <div className="flex items-start gap-5">
-              <div className="bg-violet-50 flex h-16 w-16 items-center justify-center rounded-full">
-                <User className="w-8 h-8 text-violet-500" />
-              </div>
 
-              <label htmlFor="photoUp" className="group flex-1 cursor-pointer flex flex-col items-center gap-3 rounded-lg border border-zinc-300 px-6 py-4 text-center text-zinc-500 shadow-sm hover:border-violet-200 hover:bg-violet-25 hover:text-violet-500">
-                <div className="rounded-full border-6 border-zinc-50 bg-zinc-100 p-2 group-hover:border-violet-50 group-hover:border-violet-100">
-                  <UploadCloud className="h-5 w-5 text-zinc-600 group-hover:text-violet-700" />
-                </div>
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-sm"><span className="font-semibold text-violet-700">Click to upload</span> or drag and drop</span>
-                  <span className="text-xs">SVG, PNG, JPG or GIF (max. 800x400px)</span>
-                </div>
-              </label>
-              <input type="file" className="sr-only" id="photoUp" />
-
-            </div>
+            <FileInput.Root className="flex items-start gap-5">
+              <FileInput.ImagePreview />
+              <FileInput.Trigger />
+              <FileInput.Root />
+              <FileInput.Control />
+            </FileInput.Root>
 
           </div>
 
@@ -103,7 +98,11 @@ export default function Home() {
               className="text-sm font-medium text-zinc-700">
               Country
             </label>
-            <div></div>
+            <Select placeholder="Select a country">
+              <SelectItem value="br" text="Brazil" />
+              <SelectItem value="us" text="United States" />
+            </Select>
+
           </div>
 
           <div className="grid gap-3 grid-cols-form pt-5">
@@ -112,7 +111,10 @@ export default function Home() {
               className="text-sm font-medium text-zinc-700">
               Timezone
             </label>
-            <div></div>
+            <Select placeholder="Select a timezone">
+              <SelectItem value="utc8" text="Pacific Standard Time (UTC-08:00)" />
+              <SelectItem value="utc3" text="America São Paulo (UTC-03:00)" />
+            </Select>
           </div>
 
           <div className="grid gap-3 grid-cols-form pt-5">
@@ -126,6 +128,35 @@ export default function Home() {
                 Write a short introduction.
               </span>
             </label>
+            <div className="space-y-3">
+              <div className="grid gap-3 grid-cols-2 ">
+                <Select placeholder="" defaultValue="normal">
+                  <SelectItem value="normal" defaultChecked text="Normal Text" />
+                  <SelectItem value="md" text="Markdown" />
+                </Select>
+
+                <div className="flex items-center gap-1">
+                  <button type="button" className="p-2 hover:bg-zinc-50 rounded-md">
+                    <Bold className="w-4 h-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+                  <button type="button" className="p-2 hover:bg-zinc-50 rounded-md">
+                    <Italic className="w-4 h-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+                  <button type="button" className="p-2 hover:bg-zinc-50 rounded-md">
+                    <Link className="w-4 h-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+                  <button type="button" className="p-2 hover:bg-zinc-50 rounded-md">
+                    <List className="w-4 h-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+                  <button type="button" className="p-2 hover:bg-zinc-50 rounded-md">
+                    <ListOrdered className="w-4 h-4 text-zinc-500" strokeWidth={3} />
+                  </button>
+                </div>
+              </div>
+              <TextArea
+                defaultValue="I'm a Product Designer based in Auckland, New Zealand. I specialise in UX/UI design, brand strategy, and Webflow development."
+                id="bio" />
+            </div>
           </div>
 
           <div className="grid gap-3 grid-cols-form pt-5">
@@ -139,6 +170,12 @@ export default function Home() {
                 Share a few snippets of your work.
               </span>
             </label>
+            <FileInput.Root>
+              <FileInput.Trigger />
+              <FileInput.FileList />
+              <FileInput.Root />
+              <FileInput.Control multiple />
+            </FileInput.Root>
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-5">
