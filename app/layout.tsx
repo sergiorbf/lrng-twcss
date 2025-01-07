@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from 'next/font/google'
 import { Sidebar } from "./components/Siderbar";
+import { ThemeProvider } from 'next-themes'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="antialiased">
+    <html lang="en" className="antialiased" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="grid min-h-screen grid-cols-app">
+        <div className="min-h-screen lg:grid lg:grid-cols-app dark:bg-zinc-900">
           <Sidebar />
-          <main className="px-8 pb-12 pt-8">
-            {children}
+          <main className="px-4 pb-12 pt-24 lg:col-start-2 lg:px-8 lg:pt-8 max-w-s">
+            <ThemeProvider attribute='class'>
+              {children}
+            </ThemeProvider>
           </main>
         </div>
       </body>
